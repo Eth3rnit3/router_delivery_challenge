@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 #
 #   This file is a simple Ruby RSpec test suite describing a DeliveryRouter class.
 #   Your goals are to:

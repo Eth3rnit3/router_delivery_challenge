@@ -24,7 +24,11 @@ class Rider < ModelBase
   def delivery_time_for(order)
     distance1 = distance_to(order.restaurant)
     distance2 = order.restaurant.distance_to(order.customer)
+    time_to_restaurant = (distance1 * 60) / speed
+    time_to_customer = (distance2 * 60) / speed
 
-    (((distance1 + distance2) * 60) / speed) + order.restaurant.cooking_time
+    time_to_restaurant -= order.restaurant.cooking_time if order.restaurant.cooking_time > time_to_restaurant
+
+    time_to_restaurant + time_to_customer
   end
 end

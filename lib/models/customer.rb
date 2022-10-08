@@ -19,6 +19,11 @@ class Customer < ModelBase
   end
 
   def clear_orders!
+    @orders.each do |order|
+      next if order.rider.nil?
+
+      order.rider.route.reject! { |route| route == order }
+    end
     @orders = []
   end
 end

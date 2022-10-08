@@ -30,7 +30,7 @@ class DeliveryRouter
   def route(rider: nil)
     valid_rider = rider_from_params!(rider)
 
-    valid_rider.routes.map(&:customer)
+    valid_rider.routes.map { |order| [order.restaurant, order.customer] }.flatten
   end
 
   def delivery_time(customer: nil)
@@ -51,14 +51,14 @@ class DeliveryRouter
   end
 
   def rider_from_params!(rider_id)
-    rider = @riders.find { |cust| cust.id == rider_id }
+    rider = @riders.find { |rid| rid.id == rider_id }
     raise "Rider not found with id #{rider_id}" if rider.nil?
 
     rider
   end
 
   def restaurant_from_params!(restaurant_id)
-    restaurant = @restaurants.find { |cust| cust.id == restaurant_id }
+    restaurant = @restaurants.find { |rest| rest.id == restaurant_id }
     raise "Restaurant not found with id #{restaurant_id}" if restaurant.nil?
 
     restaurant
