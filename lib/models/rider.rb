@@ -1,3 +1,4 @@
+require 'byebug'
 require_relative './base'
 
 class Rider < ModelBase
@@ -9,7 +10,7 @@ class Rider < ModelBase
     super(attributes)
 
     @routes = []
-    @speed = 10 if @speed.nil? # (km/h)
+    @speed = 0 if @speed.nil? # (km/h)
   end
 
   def add_route(order)
@@ -24,6 +25,6 @@ class Rider < ModelBase
     distance1 = distance_to(order.restaurant)
     distance2 = order.restaurant.distance_to(order.customer)
 
-    (distance1 + distance2) * speed
+    (((distance1 + distance2) * 60) / speed) + order.restaurant.cooking_time
   end
 end

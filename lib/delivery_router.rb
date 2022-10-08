@@ -65,6 +65,6 @@ class DeliveryRouter
   end
 
   def find_best_rider(order)
-    @riders.min { |r| r.delivery_time_for(order) }
+    @riders.min { |a, b| a.delivery_time_for(order) <=> b.delivery_time_for(order) }
   end
 end
