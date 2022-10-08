@@ -1,12 +1,10 @@
-require 'ostruct'
-
 class ModelBase
-  ATTRIBUTES = %i[].freeze
+  ATTRIBUTES = %i[id x y].freeze
 
   def initialize(attributes = {})
-    attributes.each_key do |attribute|
-      next unless self.class::ATTRIBUTES.include? attribute
+    accepted_attributes = ATTRIBUTES + self.class::ATTRIBUTES
 
+    accepted_attributes.each do |attribute|
       self.class.send(:define_method, "#{attribute}=") do |value|
         instance_variable_set "@#{attribute}", value
       end

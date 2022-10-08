@@ -1,5 +1,5 @@
 require_relative './base'
 
 class Customer < ModelBase
-  ATTRIBUTES = %i[id x y].freeze
+  ATTRIBUTES = %i[].freeze
 end
