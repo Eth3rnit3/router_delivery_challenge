@@ -16,4 +16,13 @@ class ModelBase
       end
     end
   end
+
+  def distance_to(model)
+    raise 'Invalid model type' unless model.class.superclass == ModelBase
+
+    from  = [x, y]
+    to    = [model.x, model.y]
+
+    Math.sqrt(from.zip(to).reduce(0) { |sum, p| sum + (p[0] - p[1])**2 })
+  end
 end
