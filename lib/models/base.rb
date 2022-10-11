@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ModelBase
   ATTRIBUTES = %i[id x y].freeze
 
